@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Big Birthday Cake</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #ffebf0;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .cake {
+      font-size: 220px;
+      position: relative;
+      animation: bounce 1s infinite alternate;
+      cursor: pointer;
+    }
+
+    /* Hiệu ứng nhấp nháy */
+    @keyframes bounce {
+      from {
+        transform: scale(1);
+      }
+      to {
+        transform: scale(1.1);
+      }
+    }
+
+    /* Ngọn nến cháy */
+    .flame {
+      position: absolute;
+      top: -50px;
+      left: 50%;
+      width: 20px;
+      height: 40px;
+      background-color: orange;
+      border-radius: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 20px rgba(255, 165, 0, 0.8);
+      animation: flicker 0.2s infinite alternate;
+    }
+
+    @keyframes flicker {
+      from {
+        transform: translateX(-50%) scale(1);
+        background-color: orange;
+        opacity: 1;
+      }
+      to {
+        transform: translateX(-50%) scale(1.2);
+        background-color: yellow;
+        opacity: 0.8;
+      }
+    }
+
+    /* Thêm hiệu ứng chữ */
+    .message {
+      position: absolute;
+      top: 120%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 24px;
+      font-weight: bold;
+      color: #ff4d79;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      animation: pulse 1.5s infinite;
+      cursor: pointer;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: translateX(-50%) scale(1);
+      }
+      50% {
+        transform: translateX(-50%) scale(1.1);
+      }
+    }
+
+    .message:hover {
+      color: #ffeb3b;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Bánh kem -->
+<div class="cake" onclick="goToNextPage()">
+  🎂
+  <div class="flame"></div>
+</div>
+
+<!-- Lời chúc -->
+<div class="message" onclick="goToNextPage()">
+  Hãy Bấm Vào
+</div>
+
+<script>
+  function goToNextPage() {
+    window.location.href = 'sinhnhat.html'; // Chuyển hướng đến trang tiếp theo
+    
+  }
+</script>
+
+</body>
+</html>

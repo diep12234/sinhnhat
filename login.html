@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login & Women's Day</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffebf0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 320px;
+            animation: fadeIn 1s ease;
+            z-index: 10;
+            position: relative;
+        }
+
+        h1 {
+            color: #ff4d79;
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #ff4d79;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #ff3366;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fall {
+            from {
+                transform: translateY(-100px) translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(100vh) translateX(20px);
+                opacity: 0;
+            }
+        }
+
+        .flower, .heart {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0.8;
+            animation: fall linear infinite;
+            pointer-events: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Trang Đăng Nhập -->
+<div class="container" id="login-form">
+    <h1>Đăng Nhập</h1>
+    <input type="text" id="username" placeholder="Tài khoản" />
+    <input type="password" id="password" placeholder="Mật khẩu" />
+    <button onclick="login()">Đăng Nhập</button>
+    <button class="btn back-btn" onclick="location.href='sinhnhat.html'">Quay Lại</button>
+</div>
+
+<!-- Trang Chúc Mừng -->
+<div class="container hidden" id="celebration-page">
+    <h1>Chúc Mừng Sinh Nhật ❤️</h1>
+    <p>Chúc em luôn xinh đẹp, hạnh phúc và cười thật nhiều! 🌸</p>
+    <button onclick="goBack()">Quay lại</button>
+</div>
+
+<script>
+    // Mảng chứa các icon muốn hiển thị
+    const icons = ['🍩', '🍬', '🎁', '🍫', '🎂', '🍪', '🍭', '🍎', '🍒', '🍍'];
+
+    // Tạo hiệu ứng rơi liên tục cho icon
+    function createFallingIcons() {
+        const icon = document.createElement('div');
+        icon.classList.add('flower');
+        icon.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+
+        // Đặt vị trí rơi từ giữa và lan ra hai bên
+        const centerX = window.innerWidth / 2;
+        const offset = (Math.random() - 0.5) * window.innerWidth * 0.8;
+        icon.style.left = `${centerX + offset}px`;
+
+        // Thời gian và độ trễ rơi khác nhau để tạo hiệu ứng tự nhiên
+        icon.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        icon.style.animationDelay = Math.random() * 2 + 's';
+
+        document.body.appendChild(icon);
+
+        // Xoá icon sau khi rơi xong để tránh lag
+        icon.addEventListener('animationend', () => {
+            icon.remove();
+        });
+    }
+
+    // Tạo hiệu ứng rơi cho icon mỗi 200ms
+    setInterval(createFallingIcons, 200);
+
+    // Xử lý đăng nhập
+    function login() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        if (username === '1' && password === '1') {
+            document.getElementById('login-form').classList.add('hidden');
+            document.getElementById('celebration-page').classList.remove('hidden');
+            createHearts();
+        } else {
+            alert('Sai tài khoản hoặc mật khẩu! 😢');
+        }
+    }
+
+    // Quay lại trang đăng nhập
+    function goBack() {
+        document.getElementById('celebration-page').classList.add('hidden');
+        document.getElementById('login-form').classList.remove('hidden');
+    }
+
+    // Tạo hiệu ứng trái tim rơi liên tục
+    function createHearts() {
+        setInterval(() => {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+
+            // Đặt vị trí rơi từ giữa và lan ra hai bên
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+
+            // Thời gian và độ trễ rơi khác nhau
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+
+            document.body.appendChild(heart);
+
+            // Xoá icon sau khi rơi xong để tránh lag
+            heart.addEventListener('animationend', () => {
+                heart.remove();
+            });
+        }, 200);
+    }
+</script>
+
+</body>
+</html>
