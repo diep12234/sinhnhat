@@ -132,7 +132,45 @@
 </div>
 
 <script>
-    // ===== Hiển thị/ẨnNguyên') {
+    // ===== Hiển thị/Ẩn mật khẩu =====
+    const passwordInput = document.getElementById('password');
+    const togglePassword = document.getElementById('toggle-password');
+
+    togglePassword.addEventListener('click', () => {
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            togglePassword.innerHTML = '🙈'; // Khi hiển thị mật khẩu
+        } else {
+            passwordInput.type = 'password';
+            togglePassword.innerHTML = '👁️'; // Khi ẩn mật khẩu
+        }
+    });
+
+    // Mảng chứa các icon muốn hiển thị
+    const icons = ['🍩', '🍬', '🎁', '🍫', '🎂', '🍪', '🍭', '🍎', '🍒', '🍍'];
+
+    // Tạo hiệu ứng rơi liên tục cho icon
+    function createFallingIcons() {
+        const icon = document.createElement('div');
+        icon.classList.add('flower');
+        icon.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+        icon.style.left = `${Math.random() * window.innerWidth}px`;
+        icon.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        icon.style.animationDelay = Math.random() * 2 + 's';
+
+        document.body.appendChild(icon);
+
+        setTimeout(() => icon.remove(), (parseFloat(icon.style.animationDuration) + parseFloat(icon.style.animationDelay)) * 1000);
+    }
+
+    setInterval(createFallingIcons, 400);
+
+    // Xử lý đăng nhập
+    function login() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        if (username === '24/3' && password === 'Trần Phương NguyênNguyên') {
             document.getElementById('login-form').classList.add('hidden');
             document.getElementById('celebration-page').classList.remove('hidden');
             createHearts();
